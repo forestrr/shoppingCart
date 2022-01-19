@@ -1,5 +1,10 @@
+const connectBusboy = require('connect-busboy');
 var express = require('express');
+const fileUpload = require('express-fileupload');
 var router = express.Router();
+
+
+
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
@@ -25,13 +30,16 @@ router.get('/', function(req, res, next) {
       description:"Lorem Ipsum has been the industry's standard dummy text ever since the 1500 ",
       image:"https://img.search.brave.com/osuLjGa0WPuKGxpSy23uOvcsOirGdveMl2SuNqaSqKQ/fit/474/225/ce/1/aHR0cHM6Ly90c2Uy/Lm1tLmJpbmcubmV0/L3RoP2lkPU9JUC5W/TGpjTjZTYmFIS0xt/STA1OE5VbWFnSGFI/YSZwaWQ9QXBp"
     }]
-  res.render('admin/view-products', { admin: true,products })
+  res.render('admin/view-products', { admin: true,products})
 });
 router.get('/add-product', (req, res) => {
+  res.render('admin/add-product', { admin: true })
+});
+router.post('/add-product',function (req,res) {
+  console.log([req.body]);
+  console.log(req.files.image);
   res.render('admin/add-product', {admin:true})
-})
-router.post('/add-product', (req, res) => {
-  console.log(req.body)
+  
 }
 )
 
