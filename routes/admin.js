@@ -2,6 +2,7 @@ const connectBusboy = require('connect-busboy');
 var express = require('express');
 const fileUpload = require('express-fileupload');
 var router = express.Router();
+var productHelper=require('../helpers/product-helpers')
 
 
 
@@ -36,9 +37,21 @@ router.get('/add-product', (req, res) => {
   res.render('admin/add-product', { admin: true })
 });
 router.post('/add-product',function (req,res) {
-  console.log([req.body]);
-  console.log(req.files.image);
-  res.render('admin/add-product', {admin:true})
+  //console.log(req.body);
+  //console.log(req.files.image);
+  productHelper.addProduct(req.body, (id) => {
+    // console.log(id)
+    let image = req.files.image
+    image.mv('./public/product-images/' + id + '.jpg', (err,done) => {
+      if(!err){
+        res.render('admin/add-product', { admin: true })
+      } else {
+        console.log(err);
+      }
+      
+    })
+    
+  })
   
 }
 )
