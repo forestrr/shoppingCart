@@ -22,9 +22,11 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(fileUpload())
 
 //database setup
-db.connect((err) => {
-  if (err) console.log('Database Connection Error' +err);
-  else console.log('Database Connected in port 27017');
+db.connect((err,data) => {
+  if (!err)
+  console.log('Database Connected in port 27017');
+  else
+  console.log('Database Connection Error' + err);
 });
 
 app.use('/', userRouter);

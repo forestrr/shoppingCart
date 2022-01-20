@@ -10,8 +10,8 @@ module.exports.connect = (done) =>{
     mongoClient.connect(url,(err,data) => {
         if (err) return done(err)
         state.db=data.db(dbname)
+        done()
     })
-    done()
 }
 module.exports.get = ()=>{
     return state.db 
