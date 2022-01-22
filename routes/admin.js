@@ -17,25 +17,25 @@ router.get('/', function(req, res, next) {
 router.get('/add-product', (req, res) => {
   res.render('admin/add-product', { admin: true })
 });
-router.post('/add-product', function (req, res) {
-  //console.log(req.body);
-  //console.log(req.files.image);
-  productHelper.addProduct(req.body, (id) => {
-    
-    let image = req.files.image
-    // console.log(_id)
-    image.mv('./public/product-images/'+id+ '.jpg',(err,done) => {
-      if(!err){
-        res.render('admin/add-product', { admin: true })
-      } else {
-        console.log(err);
-      }
-      
-    })
-    
-  })
-  
-}
+router.post('/add-product', (req, res) => {
+    //console.log(req.body);
+    //console.log(req.files.image);
+    productHelper.addProduct(req.body, (id) => {
+
+      let image = req.files.image;
+      // console.log(_id)
+      image.mv('./public/product-images/' + id + '.jpg', (err, done) => {
+        if (!err) {
+          res.render('admin/add-product', { admin: true });
+        } else {
+          console.log(err);
+        }
+
+      });
+
+    });
+
+  }
 )
 
 module.exports = router;
