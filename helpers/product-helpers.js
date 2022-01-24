@@ -1,5 +1,7 @@
-var db = require('../config/connection')
-var collection=require('../config/collections')
+var db = require('../config/connection');
+var collection=require('../config/collections');
+//var objectId=require('mongodb').ObjectId;
+const { ObjectId } = require('mongodb');
 
 module.exports = {
     addProduct: (product,callback) => {
@@ -18,6 +20,18 @@ module.exports = {
             console.log(products.name);
             
             resolve(products)
+        })
+    },
+    deleteProduct:(prodId)=>{
+        console.log(prodId);
+        //console.log(objectId(prodId));
+        console.log(ObjectId(prodId));
+        return new Promise ((resolve,reject)=>{
+            db.get().collection(collection.PRODUCT_COLLECTION).deleteOne({_id:ObjectId(prodId)}).then((response)=>{
+                
+                resolve(response)
+            })                
+            
         })
     }
 }
